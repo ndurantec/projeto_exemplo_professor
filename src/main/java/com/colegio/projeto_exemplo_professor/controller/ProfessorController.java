@@ -3,7 +3,7 @@ package com.colegio.projeto_exemplo_professor.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,16 +12,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.colegio.projeto_exemplo_professor.dto.ProfessorDTO;
 import com.colegio.projeto_exemplo_professor.model.Professor;
-
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
+import com.colegio.projeto_exemplo_professor.repository.ProfessorRepository;
 
 @RestController
 @RequestMapping("/professores")
 public class ProfessorController {
 
-    @PersistenceContext
-    private EntityManager manager;
+    @Autowired
+    private ProfessorRepository ProfessorRepository;
 
     @GetMapping
     public List<Professor> listar() {
@@ -36,11 +34,10 @@ public class ProfessorController {
         return listaDeProfessores;
     }
 
-    @PostMapping(value = "/novo")
-    @Transactional
+    @PostMapping(value = "/novo")    
     public void insert(@RequestBody ProfessorDTO novoProfessorDTO) {
         Professor novoProfessor = novoProfessorDTO.novoProfessor();
-        manager.persist(novoProfessor);
+        ProfessorRepository.save(novoProfessor);
     }
     
 }
