@@ -1,14 +1,17 @@
 package com.colegio.projeto_exemplo_professor.controller;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.colegio.projeto_exemplo_professor.dto.ProfessorDTO;
 import com.colegio.projeto_exemplo_professor.model.Professor;
@@ -35,9 +38,13 @@ public class ProfessorController {
     }
 
     @PostMapping(value = "/novo")    
-    public void insert(@RequestBody ProfessorDTO novoProfessorDTO) {
+    public ResponseEntity<Professor> insert(@RequestBody ProfessorDTO novoProfessorDTO) {
         Professor novoProfessor = novoProfessorDTO.novoProfessor();
         ProfessorRepository.save(novoProfessor);
+
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(novoProfessor.getId()).toUri();
+
+        return ResponseEntity.created(uri).body(novoProfessor);
     }
     
 }
