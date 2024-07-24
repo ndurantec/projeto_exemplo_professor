@@ -6,18 +6,31 @@ public class ProfessorDTO {
     
     private String nome;
 
-    public Professor novoProfessor() {
-        return new Professor(null, this.nome);
-    }
-    
-    public String getNome() {
-        return nome;
+    @Deprecated    
+    public ProfessorDTO() {
     }
 
-    public void setNome(String nome) {
+    public ProfessorDTO(String nome) {
         this.nome = nome;
     }
 
+    public String getNome() {
+        return nome;
+    }
+    
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+    
+    public Professor novoProfessor() {
+        return new Professor(null, this.nome);
+    }
 
+    @Override
+    public String toString() {
+        return "ProfessorDTO [nome=" + nome + "]";
+    }
+
+    
     
 }

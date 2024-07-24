@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +19,7 @@ import com.colegio.projeto_exemplo_professor.model.Professor;
 import com.colegio.projeto_exemplo_professor.repository.ProfessorRepository;
 
 @RestController
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 @RequestMapping("/professores")
 public class ProfessorController {
 
@@ -25,7 +27,7 @@ public class ProfessorController {
     private ProfessorRepository ProfessorRepository;
 
     @GetMapping
-    public List<Professor> listar() {
+    public ResponseEntity<List<Professor>> listar() {
 
         Professor prof1 = new Professor(1L, "Norberto");
         Professor prof2 = new Professor(2L, "Vinicius");
@@ -34,11 +36,15 @@ public class ProfessorController {
         listaDeProfessores.add(prof1);
         listaDeProfessores.add(prof2);
 
-        return listaDeProfessores;
+        return ResponseEntity.ok(listaDeProfessores);
     }
 
-    @PostMapping(value = "/novo")    
+    @PostMapping(value = "/novo", consumes = {"application/json"})    
+    //@PostMapping(value = "/novo", consumes = {"application/xml","application/json"} )
     public ResponseEntity<Professor> insert(@RequestBody ProfessorDTO novoProfessorDTO) {
+
+        System.out.println(novoProfessorDTO.toString());
+
         Professor novoProfessor = novoProfessorDTO.novoProfessor();
         ProfessorRepository.save(novoProfessor);
 
