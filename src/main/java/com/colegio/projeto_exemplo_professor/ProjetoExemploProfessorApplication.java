@@ -10,7 +10,7 @@ public class ProjetoExemploProfessorApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProjetoExemploProfessorApplication.class, args);
-		System.out.println("Teste de execução");
+		
 	}
 
 }
