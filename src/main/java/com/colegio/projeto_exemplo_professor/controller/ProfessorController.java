@@ -20,7 +20,7 @@ import com.colegio.projeto_exemplo_professor.repository.ProfessorRepository;
 
 @RestController
 @CrossOrigin(origins = "http://127.0.0.1:5500")
-@RequestMapping("/professores")
+@RequestMapping("/professore")
 public class ProfessorController {
 
     @Autowired
