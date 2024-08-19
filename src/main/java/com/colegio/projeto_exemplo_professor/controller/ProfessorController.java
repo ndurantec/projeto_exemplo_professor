@@ -26,7 +26,7 @@ public class ProfessorController {
     @Autowired
     private ProfessorRepository ProfessorRepository;
 
-    @GetMapping
+    @GetMapping(value = "listar")
     public ResponseEntity<List<Professor>> listar() {
 
         Professor prof1 = new Professor(1L, "Norberto");
