@@ -29,8 +29,6 @@ public class ProfessorDTO {
     @Override
     public String toString() {
         return "ProfessorDTO [nome=" + nome + "]";
-    }
-
-    
+    }   
     
 }
