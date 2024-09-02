@@ -85,32 +85,6 @@ public class ProfessorController {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     //primeira versão do método listar todos
     public void lerTodos() {
 
@@ -170,7 +144,7 @@ public class ProfessorController {
     }
 
     //Quarta versão do método bucar um registro somente
-    @GetMapping(value = "/findById/{id}")
+    @GetMapping(value = "/{id}")
     public ResponseEntity<Professor> findById(@PathVariable Long id) {
         System.out.println( "chegou no método findById");
         return professorRepository.findById(id)
